@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.101.0">
+    <title>Práctica 1</title>
+
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+<header class="container-fluid p-3 bg-primary text-white text-center">
+    <h1>Biblioteca Pública</h1>
+    <span  class="fa fa-book-reader fa-3x" aria-hidden="true"></span>
+</header>
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-secondary">
+    <div class="container-fluid">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Inicio</a>
+                </li>
+            </ul>
+            <div class="dropdown text-end">
+                <button type="button" class="btn btn-primary m-1 dropdown-toggle" data-bs-toggle="dropdown">
+                    Opciones
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/libro/list">Listado</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/libro/new">Nuevo libro</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <div class="container-fluid text-center">
+        <br>
+        <h1 class="text-primary text-center">¡Bienvenido al servicio de gestión de libros!</h1>
+        <br><br>
+        <span class="fa fa-book fa-6x" aria-hidden="true"></span>
+        <br><br>
+        <div class="d-flex justify-content-center">
+
+            <button type="button" class="btn btn-secondary m-1 btn-outline-dark btn-lg ">
+                <span class="spinner-grow spinner-grow-sm text-primary"></span>
+                <a href="/libro/list"> Comenzar</a>
+                <span class="spinner-grow spinner-grow-sm text-primary"></span>
+            </button>
+
+        </div>
+        <br><br>
+    </div>
+
+</main>
+
+<footer class="container-fluid py-3 bg-primary text-center">
+    <p class="text-white">Cristina Gómez campos</p>
+    <a href="/aviso" class="text-light" target="_blank">Aviso legal</a>
+    <br>
+    <a href="/privacidad" class="text-light" target="_blank">Política de privacidad</a>
+</footer>
+
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

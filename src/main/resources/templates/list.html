@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.101.0">
+    <title>Listado</title>
+
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+<header class="container-fluid p-3 bg-primary text-white text-center">
+    <h1>Biblioteca Pública</h1>
+    <span  class="fa fa-book-reader" aria-hidden="true"></span>
+</header>
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-secondary">
+    <div class="container-fluid">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Inicio</a>
+                </li>
+            </ul>
+
+            <div class="dropdown">
+                <button type="button" class="btn btn-primary m-1 dropdown-toggle" data-bs-toggle="dropdown">
+                    Opciones
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/libro/list">Listado</a></li>
+                    <li><a class="dropdown-item" href="/libro/new">Nuevo libro</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+        <div class="col-md-11 p-lg-11 mx-auto my-11">
+            <h1 class="display-6 fw-normal"><u>Listado de libros en la biblioteca</u></h1>
+            <br>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Editorial</th>
+                    <th>Año Publicación</th>
+                    <th>Año Edición</th>
+                    <th>Idioma</th>
+                    <th>Género</th>
+                    <th>Observaciones</th>
+                    <th>Cantidad</th>
+                    <th>Disponible</th>
+                    <th>Operaciones</th>
+                </thead>
+                <tbody>
+                <tr th:each="libro : ${listaLibros}">
+                    <td th:text="${libro.id}">ID</td>
+                    <td th:text="${libro.titulo}"></td>
+                    <td th:text="${libro.autor}"></td>
+                    <td th:text="${libro.editorial}"></td>
+                    <td th:text="${libro.anioPublicacion}"></td>
+                    <td th:text="${libro.anioEdicion}"></td>
+                    <td th:text="${libro.idioma}"></td>
+                    <td th:text="${libro.genero}"></td>
+                    <td th:text="${libro.observaciones}"></td>
+                    <td th:text="${libro.cantidad}"></td>
+                    <td>
+                        <span th:if="${libro.disponible}" class="fa fa-book" aria-hidden="true"></span>
+                        <span th:unless="${libro.disponible}" class="fa fa-minus-circle" aria-hidden="true"></span>
+                    </td>
+                    <td><a th:href="@{/libro/edit/{id}(id=${libro.id})}" aria-label="Editar"><span class="fas fa-edit" aria-hidden="true"></span></a>
+                    <a href="#" data-bs-toggle="modal" th:data-bs-target="'#delete-modal_' + ${libro.id}" aria-label="Borrar">
+                        <span class="fas fa-trash" aria-hidden="true"></span></a></td>
+
+                    <div class="modal fade" th:id="'delete-modal_' + ${libro.id}" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Borrar libro</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>¿Confirma la eliminación de este libro del registro?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <a th:href="@{/libro/delete/{id}(id=${libro.id})}" class="btn btn-primary">Aceptar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <button><a class="dropdown-item" href="/libro/new">Añadir libro</a></button>
+    </div>
+
+
+</main>
+
+<footer class="container-fluid py-3 bg-primary text-center">
+    <p class="text-white">Cristina Gómez campos</p>
+    <a href="/aviso" class="text-light" target="_blank">Aviso legal</a>
+    <br>
+    <a href="/privacidad" class="text-light" target="_blank">Política de privacidad</a>
+</footer>
+
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

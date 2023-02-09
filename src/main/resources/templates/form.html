@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.101.0">
+    <title>Formulario</title>
+
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" type="text/css"/>
+
+
+</head>
+<body>
+<header class="container-fluid p-3 bg-primary text-white text-center">
+    <h1>Biblioteca Pública</h1>
+    <span  class="fa fa-book-reader" aria-hidden="true"></span>
+</header>
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-secondary">
+    <div class="container-fluid">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Inicio</a>
+                </li>
+            </ul>
+
+            <div class="dropdown">
+                <button type="button" class="btn btn-primary m-1 dropdown-toggle" data-bs-toggle="dropdown">
+                    Opciones
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/libro/list">Listado</a></li>
+                    <li><a class="dropdown-item" href="/libro/new">Nuevo libro</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="container py-5" id="principal">
+    <div class="row g-5">
+        <div class="col-md-7 p-lg-7 mx-auto my-7">
+            <form method="post" action="#"
+                  th:action="${libroForm.id} ? @{/libro/edit/submit} : @{/libro/new/submit}"
+                  th:object="${libroForm}">
+                <h2 class="mb-3 text-center text-bg-primary" th:text="${libroForm.id} ? 'Editar libro' : 'Nuevo libro'">Nuevo libro</h2>
+                <div class="row g-3">
+                    <div class="row g-3">
+                        <div class="col-sm-6"
+                             th:classappend="${#fields.hasErrors('id')} ? 'has-error'">
+                            <label for="id" class="form-label">ID</label>
+                            <input type="text" class="form-control" id="id" placeholder="1"
+                                   th:field="*{id}"
+                                   th:attrappend="readonly=${libroForm.id} ? 'readonly' : null">
+                            <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}"
+                                  class="help-block" id="id-error">Errores</span>
+                        </div>
+                        <div class="col-sm-6"
+                             th:classappend="${#fields.hasErrors('titulo')} ? 'has-error'">
+                            <label for="titulo" class="form-label">Título</label>
+                            <input type="text" class="form-control" id="titulo" placeholder="Titulo" th:field="*{titulo}" />
+                            <span th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"
+                                  class="help-block" id="titulo-error">Errores</span>
+                        </div>
+                        <div class="col-sm-6"
+                             th:classappend="${#fields.hasErrors('autor')} ? 'has-error'">
+                            <label for="autor" class="form-label">Autor</label>
+                            <input type="text" class="form-control" id="autor" placeholder="Autor" th:field="*{autor}" />
+                            <span th:if="${#fields.hasErrors('autor')}" th:errors="*{autor}"
+                                  class="help-block" id="autor-error">Errores</span>
+                        </div>
+                        <div class="col-sm-6"
+                             th:classappend="${#fields.hasErrors('anioPublicacion')} ? 'has-error'">
+                            <label for="anioPublicacion" class="form-label">Año Publicación</label>
+                            <input type="text" class="form-control" id="anioPublicacion" placeholder="2022" th:field="*{anioPublicacion}" />
+                            <span th:if="${#fields.hasErrors('anioPublicacion')}" th:errors="*{anioPublicacion}"
+                                  class="help-block" id="anioPublicacion-error">Errores</span>
+                        </div>
+                        <div class="col-sm-6"
+                             th:classappend="${#fields.hasErrors('anioEdicion')} ? 'has-error'">
+                            <label for="anioEdicion" class="form-label">Año Edición</label>
+                            <input type="text" class="form-control" id="anioEdicion" placeholder="2022" th:field="*{anioEdicion}" />
+                            <span th:if="${#fields.hasErrors('anioEdicion')}" th:errors="*{anioEdicion}"
+                                  class="help-block" id="anioEdicion-error">Errores</span>
+                        </div>
+                        <div class="col-sm-6"
+                             th:classappend="${#fields.hasErrors('editorial')} ? 'has-error'">
+                            <label for="editorial" class="form-label">Editorial</label>
+                            <input type="text" class="form-control" id="editorial" placeholder="Editorial" th:field="*{editorial}" />
+                            <span th:if="${#fields.hasErrors('editorial')}" th:errors="*{editorial}"
+                                  class="help-block" id="editorial-error">Errores</span>
+                        </div>
+
+                        <div class="col-sm-6"
+                             th:classappend="${#fields.hasErrors('cantidad')} ? 'has-error'">
+                            <label for="cantidad" class="form-label">Cantidad</label>
+                            <input type="text" class="form-control" id="cantidad" placeholder="Cantidad" th:field="*{cantidad}" />
+                            <span th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}"
+                                  class="help-block" id="cantidad-error">Errores</span>
+                        </div>
+                        <div class="col-sm-6 "
+                             th:classappend="${#fields.hasErrors('observaciones')} ? 'has-error'">
+                            <label for="observaciones" class="form-label">Observaciones</label>
+                            <textarea rows="2" cols="37" name="lines" id="observaciones" th:field="*{observaciones}"></textarea>
+                            <span th:if="${#fields.hasErrors('observaciones')}" th:errors="*{observaciones}"
+                                  class="help-block" id="observaciones-error">Errores</span>
+                        </div>
+
+                        <div class="col-sm-6 form-group"
+                             th:classappend="${#fields.hasErrors('genero')} ? 'has-error'">
+                            <label for="genero">Idioma</label>
+                            <select class="form-control selectpicker" id="idioma" th:field="*{idioma}" th:value="${tipo}" >
+                                <option value="">Sin seleccionar</option>
+                                <option th:each="tipo : ${T(es.cristinagc.practica1.entidades.Idioma).values()}"
+                                        th:value="${tipo}" th:text="${tipo}" >
+                                </option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('idioma')}" th:errors="*{idioma}"
+                                  class="help-block" id="idioma-error">Errores</span>
+                        </div>
+
+                        <div class="col-sm-6 form-group"
+                             th:classappend="${#fields.hasErrors('genero')} ? 'has-error'">
+                            <label for="genero">Género</label>
+                            <select class="form-control selectpicker" id="genero" th:field="*{genero}" th:value="${tipo}" >
+                                <option value="">Sin seleccionar</option>
+                            <option th:each="tipo : ${T(es.cristinagc.practica1.entidades.Genero).values()}"
+                                    th:value="${tipo}" th:text="${tipo}" >
+                            </option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"
+                                  class="help-block" id="genero-error">Errores</span>
+                        </div>
+
+                        <div class="col-sm-6 form-check form-switch">
+                            <input type="checkbox" class="form-check-input" id="disponible" th:field="*{disponible}">
+                            <label class="form-check-label" for="disponible">Está disponible</label>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer class="container-fluid py-3 bg-primary text-center">
+    <p class="text-white">Cristina Gómez campos</p>
+    <a href="/aviso" class="text-light" target="_blank">Aviso legal</a>
+    <br>
+    <a href="/privacidad" class="text-light" target="_blank">Política de privacidad</a>
+</footer>
+
+
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>
